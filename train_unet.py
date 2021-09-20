@@ -99,7 +99,7 @@ if __name__ == "__main__":
     if (pretrained == True):
         model = UNet(in_shape=(C,H,W),num_classes=2)
         # model = model.load_state_dict(torch.load('./models/2018-07-05_14-26-27/Epoch17.pt'))
-        model = torch.load('./models/2018-07-06_13-48-32/Epoch3.pt')
+        model = torch.load('./models/2021-09-19_17-49-30/Epoch60.pt')
     else:
         model = UNet(in_shape=(C,H,W),num_classes=2)
    
@@ -191,7 +191,7 @@ if __name__ == "__main__":
                 # label_orig = visual(labels[0])#[0],cw)
                 # print('Label_new:',label_new.shape)
                 # print('Label_orig:',label_orig.shape)
-                update = 'Epoch: ', epoch, '| step : %d' %step,  ' | train loss : %.6f' % loss.data[0] # , '| test accuracy: %.4f' % acc
+                update = 'Epoch: ', epoch, '| step : %d' %step,  ' | train loss : %.6f' % loss.item() # , '| test accuracy: %.4f' % acc
                 update_str = [str(i) for i in update]
                 update_str = ''.join(update_str)	
                 print (update_str)
@@ -215,8 +215,6 @@ if __name__ == "__main__":
                     plt.tight_layout()
                     plt.show()
                     ax[2].set_xlabel('Samples')
-                    # plt.plot(label_new)
-                    # plt.show()
                 log_data.write(update_str + '\n')
         print ("Saving the model" )
         torch.save(model,model_path+'Epoch'+str(epoch)+'.pt')
